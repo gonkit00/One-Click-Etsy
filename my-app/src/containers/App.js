@@ -4,6 +4,7 @@ import './App.css';
 import { connect } from 'react-redux';
 import * as Actions from '../actions.js'
 import ListingList from '../components/ListingList'
+import ListingSelected from '../components/ListingSelected'
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
 
     //TODO: manage the limit/pagination
     //TODO: manage cors
+    //TODO: add fetch loader
 
     fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${apiKey}`)
       .then(res => res.json())
@@ -31,6 +33,7 @@ class App extends Component {
     return (
       <div className="App">
         <ListingList listings={this.props.listings}/>
+        <ListingSelected listing={this.props.selListings}/>
       </div>
     );
   }
@@ -38,6 +41,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   listings: state.listings,
+  selListings: state.selListings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
