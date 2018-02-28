@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
+import ListingSearch from '../components/ListingSearch';
 import apiKey from '../apiKey';
 
 class App extends Component {
@@ -41,12 +42,16 @@ class App extends Component {
     // console.log('Fetch in App: ', this.props.listings);
     return (
       <div className="App">
+        <ListingSearch
+
+        />
         <ListingList
           listings={this.props.listings}
           onSelectListing={this.handleSelectListing}
         />
         <ListingSelected
           listings={this.props.selectedListings}
+          onSelectListing={this.handleSelectListing}
         />
       </div>
     );
