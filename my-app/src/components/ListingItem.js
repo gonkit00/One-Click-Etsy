@@ -2,7 +2,10 @@ import React from 'react';
 
 const ListingItem = (props) => (
   <div className="ListingItem">
-    {props.listing.title.substr(0,15)}...
+    <img
+      src={props.listing.MainImage.url_570xN}
+      alt={props.listing.title.substr(0,20)}
+    />
   </div>
 )
 

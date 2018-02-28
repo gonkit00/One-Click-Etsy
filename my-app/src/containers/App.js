@@ -17,9 +17,11 @@ class App extends Component {
     const apiKey = 'qby4xtftjcqygc06vwpk5oom';
     const limit = 30;
     const offset = 0;
+
     //TODO: manage the limit/pagination
     //TODO: manage cors
-    fetch(`${baseUrl}/shops/${shop}/listings/active?limit=${limit}&offset=${offset}&&api_key=${apiKey}`)
+
+    fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${apiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
   }
