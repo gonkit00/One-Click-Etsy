@@ -3,15 +3,17 @@ import ListingItem from './ListingItem';
 
 const renderListings = (props) => {
   return props.listings.map(listing => (
-    <div>
-      <a href="#" onClick={() => {props.onSelectListing(listing)}}>
+    //Take care;: the key always in the first element!!
+      <a
+        key={listing.listing_id}
+        href="#"
+        onClick={() => {props.onSelectListing(listing)}}
+      >
         <ListingItem
-          key={listing.listing_id}
           listing={listing}
           onSelectListing={props.onSelectListing}
         />
       </a>
-    </div>
     )
   );
 }

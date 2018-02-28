@@ -22,6 +22,7 @@ class App extends Component {
     //TODO: manage the limit/pagination
     //TODO: manage cors
     //TODO: add fetch loader
+    //TODO: add searchBar
 
     fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${apiKey}`)
       .then(res => res.json())

@@ -10,13 +10,10 @@ const renderListings = (props) => {
   );
 }
 
-const ListingSelected = (props) => {
-  return (
-    <div className="ListingSelected">
-      {renderListings(props)}
-    </div>
-
-  )
-};
+const ListingSelected = (props) => (
+  <div className="ListingSelected">
+    {renderListings(props)}
+  </div>
+);
 
 export default ListingSelected
