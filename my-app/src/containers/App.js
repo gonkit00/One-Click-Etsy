@@ -29,14 +29,13 @@ class App extends Component {
   }
 
   handleSelectListing = (listing) => {
-    // console.log(listing.listing_id);
     if (!this.props.selectedListings.includes(listing)) {
       this.props.selectListing(listing);
     }
   }
 
   render() {
-    console.log('Fetch in App: ', this.props.listings);
+    // console.log('Fetch in App: ', this.props.listings);
     return (
       <div className="App">
         <ListingList

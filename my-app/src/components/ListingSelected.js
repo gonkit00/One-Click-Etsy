@@ -11,7 +11,6 @@ const renderListings = (props) => {
 }
 
 const ListingSelected = (props) => {
-  // console.log(props.listings[0].listing_id);
   return (
     <div className="ListingSelected">
       {renderListings(props)}
