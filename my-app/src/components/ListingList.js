@@ -3,7 +3,7 @@ import ListingItem from './ListingItem';
 
 const renderListings = (props) => {
   return props.listings.map(listing => (
-    //Take care;: the key always in the first element!!
+    //Take care: the key always in the first element!!
       <a
         key={listing.listing_id}
         href="#"

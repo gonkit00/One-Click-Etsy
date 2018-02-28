@@ -19,9 +19,17 @@ const reducer = (state = initialState, action) => {
         ]
       }
 
+    case 'DESEL_LISTING':
+      return {
+        ...state,
+        selectedListings: state.selectedListings
+          .filter(listing => {
+            return listing.listing_id !== action.listing.listing_id
+          })
+      }
+
     default:
       return state;
-
   }
 }
 

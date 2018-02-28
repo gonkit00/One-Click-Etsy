@@ -32,6 +32,8 @@ class App extends Component {
   handleSelectListing = (listing) => {
     if (!this.props.selectedListings.includes(listing)) {
       this.props.selectListing(listing);
+    } else {
+      this.props.deselectListing(listing);
     }
   }
 
@@ -59,6 +61,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addListings: (listings) => dispatch(Actions.addListings(listings)),
   selectListing: (listing) => dispatch(Actions.selectListing(listing)),
+  deselectListing: (listing) => dispatch(Actions.deselectListing(listing)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
