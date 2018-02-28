@@ -30,7 +30,9 @@ class App extends Component {
 
   handleSelectListing = (listing) => {
     // console.log(listing.listing_id);
-    this.props.selListing(listing);
+    if (!this.props.selectedListings.includes(listing)) {
+      this.props.selectListing(listing);
+    }
   }
 
   render() {
@@ -42,7 +44,7 @@ class App extends Component {
           onSelectListing={this.handleSelectListing}
         />
         <ListingSelected
-          listing={this.props.selListings}
+          listings={this.props.selectedListings}
         />
       </div>
     );
@@ -51,12 +53,12 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   listings: state.listings,
-  selListings: state.selListings,
+  selectedListings: state.selectedListings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addListings: (listings) => dispatch(Actions.addListings(listings)),
-  selListing: (listing) => dispatch(Actions.selListing(listing)),
+  selectListing: (listing) => dispatch(Actions.selectListing(listing)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

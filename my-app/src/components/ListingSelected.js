@@ -1,10 +1,13 @@
 import React from 'react';
+import ListingList from './ListingList';
 
 const ListingSelected = (props) => {
-  console.log(props.listing);
+  // console.log(props.listings[0].listing_id);
   return (
     <div className="ListingSelected">
-      hey!
+      <ListingList
+        listings={props.listings}
+      />
     </div>
 
   )

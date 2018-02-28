@@ -3,7 +3,7 @@ export const addListings = (listings) => ({
   listings
 });
 
-export const selListing = (listing) => ({
+export const selectListing = (listing) => ({
   type: 'SEL_LISTING',
   listing
 });

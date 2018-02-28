@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const initialState = {listings:[], selListings:[]}
+const initialState = {listings:[], selectedListings:[]}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,8 +13,8 @@ const reducer = (state = initialState, action) => {
     case 'SEL_LISTING':
       return {
         ...state,
-        selListings: [
-          ...state.selListings,
+        selectedListings: [
+          ...state.selectedListings,
           action.listing
         ]
       }
