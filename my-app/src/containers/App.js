@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import * as Actions from './actions.js'
+import * as Actions from '../actions.js'
+import ListingList from '../components/ListingList'
 
 class App extends Component {
 
@@ -14,17 +15,17 @@ class App extends Component {
     const baseUrl = 'https://openapi.etsy.com/v2';
     const shop = 'lollycloth';
     const apiKey = 'qby4xtftjcqygc06vwpk5oom';
-    //TODO: manage the limit
+    //TODO: manage the limit/pagination
+    //TODO: manage cors
     fetch(`${baseUrl}/shops/${shop}/listings/active?api_key=${apiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
   }
 
   render() {
-    console.log(this.props.listings);
     return (
       <div className="App">
-        App.js!!
+        <ListingList listings={this.props.listings}/>
       </div>
     );
   }
