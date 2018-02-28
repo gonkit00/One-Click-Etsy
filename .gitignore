@@ -1,4 +1,5 @@
 .DS_Store
+./my-app/src/apiKey.js
 
 # Logs
 logs

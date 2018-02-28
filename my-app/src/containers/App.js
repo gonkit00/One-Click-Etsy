@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import * as Actions from '../actions.js'
-import ListingList from '../components/ListingList'
-import ListingSelected from '../components/ListingSelected'
+import * as Actions from '../actions.js';
+import ListingList from '../components/ListingList';
+import ListingSelected from '../components/ListingSelected';
+import apiKey from '../apiKey';
 
 class App extends Component {
 
@@ -15,7 +16,6 @@ class App extends Component {
   fetchListings = () => {
     const baseUrl = 'https://openapi.etsy.com/v2';
     const shop = 'lollycloth';
-    const apiKey = 'qby4xtftjcqygc06vwpk5oom';
     const limit = 30;
     const offset = 0;
 
@@ -29,8 +29,8 @@ class App extends Component {
   }
 
   handleSelectListing = (listing) => {
-    // e.preventDefault();
-    console.log(listing.listing_id);
+    // console.log(listing.listing_id);
+    this.props.selListing(listing);
   }
 
   render() {

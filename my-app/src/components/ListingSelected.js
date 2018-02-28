@@ -1,9 +1,13 @@
 import React from 'react';
 
-const ListingSelected = (props) => (
-  <div className="ListingSelected">
-    I'm ListingSelected
-  </div>
-);
+const ListingSelected = (props) => {
+  console.log(props.listing);
+  return (
+    <div className="ListingSelected">
+      hey!
+    </div>
+
+  )
+};
 
 export default ListingSelected
