@@ -10,6 +10,15 @@ const reducer = (state = initialState, action) => {
         listings: action.listings
       }
 
+    case 'SEL_LISTING':
+      return {
+        ...state,
+        selListings: [
+          ...state.selListings,
+          action.listing
+        ]
+      }
+
     default:
       return state;
 

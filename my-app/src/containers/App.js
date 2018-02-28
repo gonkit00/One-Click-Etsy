@@ -28,12 +28,22 @@ class App extends Component {
       .then(response => this.props.addListings(response.results))
   }
 
+  handleSelectListing = (listing) => {
+    // e.preventDefault();
+    console.log(listing.listing_id);
+  }
+
   render() {
     console.log('Fetch in App: ', this.props.listings);
     return (
       <div className="App">
-        <ListingList listings={this.props.listings}/>
-        <ListingSelected listing={this.props.selListings}/>
+        <ListingList
+          listings={this.props.listings}
+          onSelectListing={this.handleSelectListing}
+        />
+        <ListingSelected
+          listing={this.props.selListings}
+        />
       </div>
     );
   }
@@ -46,6 +56,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addListings: (listings) => dispatch(Actions.addListings(listings)),
+  selListing: (listing) => dispatch(Actions.selListing(listing)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

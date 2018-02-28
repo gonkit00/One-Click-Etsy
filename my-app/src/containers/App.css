@@ -2,6 +2,11 @@
   color: #666;
 }
 
+.App a {
+  color: #666;
+  text-decoration: none;
+}
+
 .ListingList, .ListingSelected {
   width: 800px;
 }

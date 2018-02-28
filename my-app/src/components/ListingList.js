@@ -6,6 +6,7 @@ const renderListings = (props) => {
     <ListingItem
       key={listing.listing_id}
       listing={listing}
+      onSelectListing={props.onSelectListing}
     />
   );
 }
