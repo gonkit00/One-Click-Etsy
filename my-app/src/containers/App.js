@@ -6,7 +6,9 @@ import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
 import ListingSearch from '../components/ListingSearch';
-import apiKey from '../apiKey';
+import config from '../config';
+
+import MyFacebookLogin from '../components/MyFacebookLogin'
 
 class App extends Component {
 
@@ -24,7 +26,7 @@ class App extends Component {
     //TODO: manage cors
     //TODO: add fetch loader
 
-    fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${apiKey}`)
+    fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
   }
@@ -52,6 +54,8 @@ class App extends Component {
           listings={this.props.selectedListings}
           onSelectListing={this.handleSelectListing}
         />
+        <MyFacebookLogin />
+
       </div>
     );
   }
