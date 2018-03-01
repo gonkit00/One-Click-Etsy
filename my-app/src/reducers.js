@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const initialState = {listings:[], selectedListings:[], searchedListings:[]}
+const initialState = {listings:[], selectedListings:[], searchedListings:[], facebookToken:undefined}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,6 +23,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchedListings: state.listings.filter(listing => listing.title.toLowerCase().includes(action.searchText))
+      }
+
+    case 'ADD_FACEBOOK_TOKEN':
+      return {
+        ...state,
+        facebookToken: action.token
       }
 
     default:

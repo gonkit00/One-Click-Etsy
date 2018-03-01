@@ -8,7 +8,7 @@ import ListingSelected from '../components/ListingSelected';
 import ListingSearch from '../components/ListingSearch';
 import config from '../config';
 
-import MyFacebookLogin from '../components/MyFacebookLogin'
+import MyFacebookLogin from '../containers/MyFacebookLogin'
 
 class App extends Component {
 
@@ -54,7 +54,9 @@ class App extends Component {
           listings={this.props.selectedListings}
           onSelectListing={this.handleSelectListing}
         />
-        <MyFacebookLogin />
+        <MyFacebookLogin
+          selectedListings={this.props.selectedListings}
+        />
 
       </div>
     );
