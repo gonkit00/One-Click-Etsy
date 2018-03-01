@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 
-const initialState = {listings:[], selectedListings:[]}
+const initialState = {listings:[], selectedListings:[], searchedListings:[]}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_LISTINGS':
       return {
         ...state,
-        listings: action.listings
+        listings: action.listings,
+        searchedListings: action.listings
       }
 
     case 'TOGGLE_LISTING_SELECTED':
@@ -21,7 +22,7 @@ const reducer = (state = initialState, action) => {
     case 'SEARCH_LISTINGS':
       return {
         ...state,
-        listings: state.listings.filter(listing => listing.title.toLowerCase().includes(action.searchText))
+        searchedListings: state.listings.filter(listing => listing.title.toLowerCase().includes(action.searchText))
       }
 
     default:

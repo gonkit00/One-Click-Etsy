@@ -5,6 +5,7 @@ const ListingItem = (props) => {
       <a
         key={props.listing.listing_id}
         href="#"
+        //When I have parameters to pass use a callback!
         onClick={() => {props.onSelectListing(props.listing)}}
       >
         <img

@@ -23,7 +23,6 @@ class App extends Component {
     //TODO: manage the limit/pagination
     //TODO: manage cors
     //TODO: add fetch loader
-    //TODO: add searchBar
 
     fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${apiKey}`)
       .then(res => res.json())
@@ -35,8 +34,6 @@ class App extends Component {
   }
 
   handleChangeSearchBox = (e) => {
-    console.log(e.target.value);
-    //dispatch FILTER_LISTINGS action
     this.props.searchListings(e.target.value);
   }
 
@@ -48,7 +45,7 @@ class App extends Component {
           onChangeSearchBox={this.handleChangeSearchBox}
         />
         <ListingList
-          listings={this.props.listings}
+          listings={this.props.searchedListings}
           onSelectListing={this.handleSelectListing}
         />
         <ListingSelected
@@ -61,8 +58,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  listings: state.listings,
+  // listings: state.listings,
   selectedListings: state.selectedListings,
+  searchedListings: state.searchedListings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
