@@ -10,22 +10,18 @@ const reducer = (state = initialState, action) => {
         listings: action.listings
       }
 
-    case 'SEL_LISTING':
+    case 'TOGGLE_LISTING_SELECTED':
       return {
         ...state,
-        selectedListings: [
-          ...state.selectedListings,
-          action.listing
-        ]
+        selectedListings: state.selectedListings.includes(action.listing)
+          ? state.selectedListings.filter(listing => listing.listing_id !== action.listing.listing_id)
+          : [...state.selectedListings, action.listing]
       }
 
-    case 'DESEL_LISTING':
+    case 'SEARCH_LISTINGS':
       return {
         ...state,
-        selectedListings: state.selectedListings
-          .filter(listing => {
-            return listing.listing_id !== action.listing.listing_id
-          })
+        listings: state.listings.filter(listing => listing.title.toLowerCase().includes(action.searchText))
       }
 
     default:

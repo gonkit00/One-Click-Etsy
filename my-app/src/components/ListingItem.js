@@ -1,5 +1,4 @@
 import React from 'react';
-
 const ListingItem = (props) => {
   return (
     <div className="ListingItem">

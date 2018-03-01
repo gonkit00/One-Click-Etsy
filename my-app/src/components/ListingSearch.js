@@ -1,10 +1,11 @@
 import React from 'react';
 
-const ListingSearch = (props) => (
+export default (props) => (
   <div className="ListingSearch">
     <label>Search</label>
-    <input type="text" />
+    <input
+      type="text"
+      onChange={props.onChangeSearchBox}
+    />
   </div>
 )
-
-export default ListingSearch;

@@ -3,12 +3,12 @@ export const addListings = (listings) => ({
   listings
 });
 
-export const selectListing = (listing) => ({
-  type: 'SEL_LISTING',
-  listing
+export const searchListings = (searchText) => ({
+  type: 'SEARCH_LISTINGS',
+  searchText
 });
 
-export const deselectListing = (listing) => ({
-  type: 'DESEL_LISTING',
+export const toggleListingSelected = (listing) => ({
+  type: 'TOGGLE_LISTING_SELECTED',
   listing
 });

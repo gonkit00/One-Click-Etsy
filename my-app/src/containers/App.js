@@ -31,11 +31,13 @@ class App extends Component {
   }
 
   handleSelectListing = (listing) => {
-    if (!this.props.selectedListings.includes(listing)) {
-      this.props.selectListing(listing);
-    } else {
-      this.props.deselectListing(listing);
-    }
+    this.props.toggleListingSelected(listing);
+  }
+
+  handleChangeSearchBox = (e) => {
+    console.log(e.target.value);
+    //dispatch FILTER_LISTINGS action
+    this.props.searchListings(e.target.value);
   }
 
   render() {
@@ -43,7 +45,7 @@ class App extends Component {
     return (
       <div className="App">
         <ListingSearch
-
+          onChangeSearchBox={this.handleChangeSearchBox}
         />
         <ListingList
           listings={this.props.listings}
@@ -65,8 +67,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addListings: (listings) => dispatch(Actions.addListings(listings)),
-  selectListing: (listing) => dispatch(Actions.selectListing(listing)),
-  deselectListing: (listing) => dispatch(Actions.deselectListing(listing)),
+  toggleListingSelected: (listing) => dispatch(Actions.toggleListingSelected(listing)),
+  searchListings: (searchText) => dispatch(Actions.searchListings(searchText)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
