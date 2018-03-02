@@ -9,7 +9,7 @@ const ListingItem = (props) => {
         onClick={() => {props.onSelectListing(props.listing)}}
       >
         <img
-          src={props.listing.MainImage.url_170x135}
+          src={props.listing.Images[0].url_170x135}
           alt={props.listing.title.substr(0,80)}
         />
         <div>

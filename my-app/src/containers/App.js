@@ -28,7 +28,7 @@ class App extends Component {
     //TODO: add fetch loader
 
     //After installing npm fetch-jsonp I can use JSONP recommended by Etsy to not have problems with cross requests
-    fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
+    fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=Images&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
   }

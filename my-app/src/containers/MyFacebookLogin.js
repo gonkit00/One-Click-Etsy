@@ -15,33 +15,31 @@ class MyFacebookLogin extends Component {
   baseUrl = 'https://graph.facebook.com/v2.12';
 
   responseFacebook = (response) => {
-    console.log('Facebook response: ',response);
     this.props.addFacebookToken(response.accessToken);
   }
 
   publishPost = () => {
     this.props.selectedListings.forEach(listing => {
-      fetch(`${this.baseUrl}/me/photos?url=${listing.Images[0].url_570xN}&caption=my caption&published=false&access_token=${this.props.facebookToken}`, {
-        method: "POST"
-      })
-      .then(res => res.json())
-      .then (res => {
-        fetch(`${this.baseUrl}/me/feed?message=Hello Kimba!&attached_media[0]={"media_fbid":"${res.id}"}&access_token=${this.props.facebookToken}`, {
+      const promises = listing.Images.map(image =>
+        fetch(`${this.baseUrl}/me/photos?url=${image.url_570xN}&caption=my caption&published=false&access_token=${this.props.facebookToken}`, {
           method: "POST"
         })
-        //TODO: notify the user
-        .then(res => console.log('Facebook Post result: ',res.ok))
+        .then(res => res.json())
+        .then(res => res.id)
+      )
+
+      Promise.all(promises)
+      .then (ids => {
+        const qs = ids.map((id, index) => `attached_media[${index}]={"media_fbid":"${id}"}`).join('&');
+
+        fetch(`${this.baseUrl}/me/feed?message=Hello Kimba!&${qs}&access_token=${this.props.facebookToken}`,
+          {
+            method: "POST"
+          })
+          //TODO: notify the user
+          .then(res => console.log('Facebook Post result: ',res.ok))
       })
     })
-    // fetch(`${this.baseUrl}/me/photos?url=${this.props.selectedListings[0].MainImage.url_570xN}&caption=Hello Kimba!&published=false&access_token=${this.props.facebookToken}`, {
-    //   method: "POST"
-    // })
-    // .then(res => res.json())
-    // .then (res => {
-    //   fetch(`${this.baseUrl}/me/feed?message=Hello Kimba!&attached_media[0]={"media_fbid":"${res.id}"}&access_token=${this.props.facebookToken}`, {
-    //     method: "POST"
-    //   })
-    // })
   }
 
   render () {
