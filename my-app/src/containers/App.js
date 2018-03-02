@@ -26,12 +26,6 @@ class App extends Component {
 
     //TODO: handle the limit/pagination
     //TODO: add fetch loader
-    //TODO: post for Facebook pages
-    //TODO: MyFacebookLogin: why the second json doesn't work?
-
-    //This is the fetch that get JSON back. It doesn't work as Etsy doesn't allow cross requests fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
-    //   .then(res => res.json())
-    //   .then(response => this.props.addListings(response.results))
 
     //After installing npm fetch-jsonp I can use JSONP recommended by Etsy to not have problems with cross requests
     fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
