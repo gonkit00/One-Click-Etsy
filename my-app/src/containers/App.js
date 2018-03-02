@@ -19,8 +19,8 @@ class App extends Component {
 
   fetchListings = () => {
     const baseUrl = 'https://openapi.etsy.com/v2';
-    // const shop = this.props.searchedShop;
-    const shop = 'lollycloth';
+    const shop = this.props.searchedShop;
+    // const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
 
