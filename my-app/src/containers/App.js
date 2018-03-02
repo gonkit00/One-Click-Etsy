@@ -7,6 +7,7 @@ import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
 import ListingSearch from '../components/ListingSearch';
 import config from '../config';
+import fetchJSONP from 'fetch-jsonp';
 
 import MyFacebookLogin from '../containers/MyFacebookLogin'
 
@@ -26,7 +27,12 @@ class App extends Component {
     //TODO: manage cors
     //TODO: add fetch loader
 
-    fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
+    //This is the fetch that get JSON back. It doesn't work as Etsy doesn't allow cross requests fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
+    //   .then(res => res.json())
+    //   .then(response => this.props.addListings(response.results))
+
+    //After installign npm fetch-jsonp I can use JSONP recommended by Etsy to not have problems with cross requests
+    fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
   }
@@ -43,6 +49,8 @@ class App extends Component {
     // console.log('Fetch in App: ', this.props.listings);
     return (
       <div className="App">
+        {/* <button href="http://localhost:3001/sign-in-pinterest">Sign in with pinterest</button> */}
+
         <ListingSearch
           onChangeSearchBox={this.handleChangeSearchBox}
         />
