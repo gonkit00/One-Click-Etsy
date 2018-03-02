@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
-import ListingSearch from '../components/ListingSearch';
+import SearchBox from '../components/SearchBox';
 import config from '../config';
 import fetchJSONP from 'fetch-jsonp';
 
@@ -19,19 +19,18 @@ class App extends Component {
 
   fetchListings = () => {
     const baseUrl = 'https://openapi.etsy.com/v2';
-    const shop = 'lollycloth';
+    const shop = this.props.searchedShop;
     const limit = 30;
     const offset = 0;
 
-    //TODO: manage the limit/pagination
-    //TODO: manage cors
+    //TODO: handle the limit/pagination
     //TODO: add fetch loader
 
     //This is the fetch that get JSON back. It doesn't work as Etsy doesn't allow cross requests fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
     //   .then(res => res.json())
     //   .then(response => this.props.addListings(response.results))
 
-    //After installign npm fetch-jsonp I can use JSONP recommended by Etsy to not have problems with cross requests
+    //After installing npm fetch-jsonp I can use JSONP recommended by Etsy to not have problems with cross requests
     fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
@@ -41,8 +40,13 @@ class App extends Component {
     this.props.toggleListingSelected(listing);
   }
 
-  handleChangeSearchBox = (e) => {
+  handleChangeSearchListings = (e) => {
     this.props.searchListings(e.target.value);
+  }
+
+  handleChangeSearchShop = async (e) => {
+    await this.props.searchShop(e.target.value);
+    this.fetchListings();
   }
 
   render() {
@@ -51,8 +55,11 @@ class App extends Component {
       <div className="App">
         {/* <button href="http://localhost:3001/sign-in-pinterest">Sign in with pinterest</button> */}
 
-        <ListingSearch
-          onChangeSearchBox={this.handleChangeSearchBox}
+        <SearchBox
+          onChangeSearchShop={this.handleChangeSearchShop}
+        />
+        <SearchBox
+          onChangeSearchListings={this.handleChangeSearchListings}
         />
         <ListingList
           listings={this.props.searchedListings}
@@ -75,12 +82,14 @@ const mapStateToProps = (state) => ({
   // listings: state.listings,
   selectedListings: state.selectedListings,
   searchedListings: state.searchedListings,
+  searchedShop: state.searchedShop,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addListings: (listings) => dispatch(Actions.addListings(listings)),
   toggleListingSelected: (listing) => dispatch(Actions.toggleListingSelected(listing)),
   searchListings: (searchText) => dispatch(Actions.searchListings(searchText)),
+  searchShop: (searchText) => dispatch(Actions.searchShop(searchText)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

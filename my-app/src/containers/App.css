@@ -7,7 +7,7 @@
   text-decoration: none;
 }
 
-.ListingList, .ListingSelected, .ListingSearch, .MyFacebookLogin {
+.ListingList, .ListingSelected, .SearchBox, .MyFacebookLogin {
   width: 800px;
 }
 
@@ -35,6 +35,6 @@
   width: 170px;
 }
 
-.ListingSearch {
+.SearchBox {
   margin: 20px auto;
 }
