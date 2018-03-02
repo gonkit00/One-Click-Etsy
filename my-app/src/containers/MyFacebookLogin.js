@@ -7,9 +7,25 @@ import config from '../config'
 
 class MyFacebookLogin extends Component {
 
+  baseUrl = 'https://graph.facebook.com/v2.12';
+
   responseFacebook = (response) => {
-    console.log(response);
-    this.props.addFacebookToken(response.accessToken)
+    console.log('Facebook response: ',response);
+    this.props.addFacebookToken(response.accessToken);
+  }
+
+  publishPost = () => {
+    fetch(`${this.baseUrl}/me/photos?url=${this.props.selectedListings[0].MainImage.url_570xN}&caption=Hello Kimba!&published=false&access_token=${this.props.facebookToken}`, {
+      method: "POST"
+    })
+    .then(res => res.json())
+    .then (res => {
+      fetch(`${this.baseUrl}/me/feed?message=Hello Kimba!&attached_media[0]={"media_fbid":"${res.id}"}&access_token=${this.props.facebookToken}`, {
+        method: "POST"
+      })
+    })
+    // .then(res => res.json())
+    // .then(res => console.log('Fetch POST response: ',res));
   }
 
   render () {
@@ -20,17 +36,21 @@ class MyFacebookLogin extends Component {
             appId={config.facebookAppId}
             autoLoad={true}
             fields="name,email,picture"
+            scope="publish_actions, user_photos"
             // onClick={componentClicked}
+            size="small"
             callback={this.responseFacebook}
-            size='small'
           />
         </div>
       )
-    } else {
+    } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
+          <button onClick={this.publishPost}>Publish</button>
         </div>
       )
+    } else {
+      return null;
     }
   }
 }

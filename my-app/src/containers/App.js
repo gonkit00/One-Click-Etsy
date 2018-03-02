@@ -19,12 +19,15 @@ class App extends Component {
 
   fetchListings = () => {
     const baseUrl = 'https://openapi.etsy.com/v2';
-    const shop = this.props.searchedShop;
+    // const shop = this.props.searchedShop;
+    const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
 
     //TODO: handle the limit/pagination
     //TODO: add fetch loader
+    //TODO: post for Facebook pages
+    //TODO: MyFacebookLogin: why the second json doesn't work?
 
     //This is the fetch that get JSON back. It doesn't work as Etsy doesn't allow cross requests fetch(`${baseUrl}/shops/${shop}/listings/active?includes=MainImage&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
     //   .then(res => res.json())
