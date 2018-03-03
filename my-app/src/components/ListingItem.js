@@ -6,7 +6,7 @@ import './ListingItem.css';
 class ListingItem extends Component {
 
   cardStyle = {
-    width: 200
+    width: 190
   };
   // buttonStyle = {
   //   marginLeft: 45
@@ -16,12 +16,10 @@ class ListingItem extends Component {
   }
 
   handleClick = () => {
-    if (this.state.cardClass !== '') {
-      this.setState({cardClass: ''})
-    } else {
-      this.setState({cardClass: 'selectedCard'})
-    }
-    this.props.onSelectListing(this.props.listing)
+    if (this.state.cardClass !== '') this.setState({cardClass: ''})
+    else this.setState({cardClass: 'selectedCard'});
+
+    this.props.onSelectListing(this.props.listing);
   }
 
   render () {
@@ -40,22 +38,6 @@ class ListingItem extends Component {
             <RaisedButton label="Select" primary={true} style={this.buttonStyle} onClick={() => {this.props.onSelectListing(this.props.listing)}} />
           </CardActions> */}
         </Card>
-        {/* <a
-          key={this.props.listing.listing_id}
-          href="#"
-          //When I have parameters to pass use a callback!
-          onClick={() => {this.props.onSelectListing(this.props.listing)}}
-        >
-          <img
-            src={this.props.listing.Images[0].url_170x135}
-            alt={this.props.listing.title.substr(0,80)}
-          />
-          <div>
-            <small className="description">
-              {this.props.listing.title.substr(0,80)}...
-            </small>
-          </div>
-        </a> */}
       </div>
     )
   }

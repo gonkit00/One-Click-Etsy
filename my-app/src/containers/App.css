@@ -12,9 +12,47 @@
   text-decoration: none;
 }
 
-.App .large_logo {
-  margin: 20px auto 0 auto;
+.App .header {
+  margin: 0 auto;
+  background-color: #f05740;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.App .header .image-logo {
   width: 300px;
+  margin: 0 auto;
+}
+
+.App .header img {
+  width: 300px;
+}
+
+.App .block {
+  color: #999;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+.App .block.selected {
+  background-color: #f3f3f3;
+  padding: 10px 0;
+}
+.App .block.listings .ListingItem{
+  height: 236px;
+}
+
+.App .block .caption {
+  margin-right: 20px;
+  flex: 0.3;
+}
+.App .block p {
+  font-size: 1.5em;
+}
+.App .block small {
+  font-size: 0.8em;
 }
 
 .ListingList, .ListingSelected, .MyFacebookLogin {
@@ -22,33 +60,41 @@
 }
 
 .ListingList {
-  margin: 80px auto 0 auto;
+  margin: 20px 0;
   display: flex;
   overflow: auto;
 }
 
-.RefreshIndicator{
-  margin: 0 auto;
-}
-
 .ListingSelected {
-  margin: 50px auto;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   overflow: auto;
 }
 
 .MyFacebookLogin {
-  margin: 100px auto;
+  margin: 20px auto;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+.MyFacebookLogin .kep-login-facebook {
+  background-color: #26C6DA;
+}
+.MyFacebookLogin p {
+  align-self: center;
+  font-size: 1.5em;
+  color: #999;
 }
 
-.searchArea {
+.search-area {
   display: flex;
-  margin: 30px auto 0 auto;
+  margin: 30px auto 20px auto;
 }
 
 .SearchBox {
   margin: 0 50px;
+}
+
+.RaisedButton .its-handy {
+  font-size: 30px;
 }

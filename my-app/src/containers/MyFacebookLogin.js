@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import FacebookLogin from 'react-facebook-login';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import config from '../config'
 import queryString from 'query-string';
@@ -67,7 +68,13 @@ class MyFacebookLogin extends Component {
   }
 
   render () {
+
+    const style = {
+      height: 70
+    };
+
     if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
+
       return (
         <div className="MyFacebookLogin">
           <FacebookLogin
@@ -84,7 +91,8 @@ class MyFacebookLogin extends Component {
     } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
-          <button onClick={this.publishPost}>IT'S HANDY!</button>
+          <p>Post all your listing in just one click...</p>
+          <RaisedButton onClick={this.publishPost} label="IT'S HANDY!" primary={true} style={style} labelStyle={{ fontSize: '30px'}} />
         </div>
       )
     } else {

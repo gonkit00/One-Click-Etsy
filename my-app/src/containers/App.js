@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import * as Actions from '../actions.js';
@@ -8,7 +7,8 @@ import ListingSelected from '../components/ListingSelected';
 import SearchBox from '../components/SearchBox';
 import config from '../config';
 import fetchJSONP from 'fetch-jsonp';
-import large_logo from '../images/logo_transparent_background.png';
+// import large_logo from '../images/logo_transparent_background.png';
+import large_logo from '../images/white_logo_transparent_background.png';
 
 import MyFacebookLogin from '../containers/MyFacebookLogin'
 
@@ -48,12 +48,17 @@ class App extends Component {
 
   render() {
     // console.log('Fetch in App: ', this.props.listings);
+
     return (
       <div className="App">
-        {/* <button href="http://localhost:3001/sign-in-pinterest">Sign in with pinterest</button> */}
-        <img src={large_logo} className="large_logo" alt="Handy Etsy"/>
+        <div className="header">
+          <div className="image-logo">
+            <img src={large_logo} alt="Handy Etsy"/>
 
-        <div className="searchArea">
+          </div>
+        </div>
+
+        <div className="search-area">
           <SearchBox
             onChangeSearchShop={this.handleChangeSearchShop}
           />
@@ -61,14 +66,26 @@ class App extends Component {
             onChangeSearchListings={this.handleChangeSearchListings}
           />
         </div>
-        <ListingList
-          listings={this.props.searchedListings}
-          onSelectListing={this.handleSelectListing}
-        />
-        <ListingSelected
-          listings={this.props.selectedListings}
-          onSelectListing={this.handleSelectListing}
-        />
+        <div className="block listings">
+          <div className="caption">
+            <p>My listings</p>
+            <small>All the listings from the shop you searched for are ordered by recency</small>
+          </div>
+          <ListingList
+            listings={this.props.searchedListings}
+            onSelectListing={this.handleSelectListing}
+          />
+        </div>
+        <div className="block selected">
+          <div className="caption">
+            <p>My selected listings</p>
+            <small>All the listings you put here are ready to be posted on Facebook</small>
+          </div>
+          <ListingSelected
+            listings={this.props.selectedListings}
+            onSelectListing={this.handleSelectListing}
+          />
+        </div>
         <MyFacebookLogin
           selectedListings={this.props.selectedListings}
         />
