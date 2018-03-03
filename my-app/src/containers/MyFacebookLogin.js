@@ -83,7 +83,7 @@ class MyFacebookLogin extends Component {
     } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
-          <button onClick={this.publishPost}>BOOM!</button>
+          <button onClick={this.publishPost}>IT'S HANDY!</button>
         </div>
       )
     } else {
