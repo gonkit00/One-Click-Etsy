@@ -18,9 +18,9 @@ class App extends Component {
     this.fetchListings();
   }
 
-  fetchListings = () => {
+  fetchListings = (value) => {
     const baseUrl = 'https://openapi.etsy.com/v2';
-    const shop = this.props.searchedShop;
+    const shop = value;
     // const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
@@ -42,9 +42,8 @@ class App extends Component {
     this.props.searchListings(e.target.value);
   }
 
-  handleChangeSearchShop = async (e) => {
-    await this.props.searchShop(e.target.value);
-    this.fetchListings();
+  handleChangeSearchShop = (e) => {
+    this.fetchListings(e.target.value);
   }
 
   render() {
@@ -83,14 +82,12 @@ const mapStateToProps = (state) => ({
   // listings: state.listings,
   selectedListings: state.selectedListings,
   searchedListings: state.searchedListings,
-  searchedShop: state.searchedShop,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addListings: (listings) => dispatch(Actions.addListings(listings)),
   toggleListingSelected: (listing) => dispatch(Actions.toggleListingSelected(listing)),
   searchListings: (searchText) => dispatch(Actions.searchListings(searchText)),
-  searchShop: (searchText) => dispatch(Actions.searchShop(searchText)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

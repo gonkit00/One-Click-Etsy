@@ -8,11 +8,6 @@ export const searchListings = (searchText) => ({
   searchText
 });
 
-export const searchShop = (searchText) => ({
-  type: 'SEARCH_SHOP',
-  searchText
-});
-
 export const toggleListingSelected = (listing) => ({
   type: 'TOGGLE_LISTING_SELECTED',
   listing

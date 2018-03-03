@@ -31,12 +31,6 @@ const reducer = (state = initialState, action) => {
         searchedListings: state.listings.filter(listing => listing.title.toLowerCase().includes(action.searchText))
       }
 
-    case 'SEARCH_SHOP':
-      return {
-        ...state,
-        searchedShop: action.searchText
-      }
-
     case 'ADD_FACEBOOK_TOKEN':
       return {
         ...state,
