@@ -1,4 +1,6 @@
 import React from 'react';
+import './ListingItem.css';
+
 const ListingItem = (props) => {
   return (
     <div className="ListingItem">

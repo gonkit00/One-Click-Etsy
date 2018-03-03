@@ -1,0 +1,15 @@
+.ListingItem .selectedCard {
+  opacity: 0.5;
+}
+
+.ListingItem{
+  transition: 0.5s ease;
+  margin: 0 10px;
+}
+
+.ListingItem:hover{
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  transform: scale(0.9);
+  transition: 0.5s ease;
+}
