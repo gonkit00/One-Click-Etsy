@@ -8,6 +8,7 @@ import ListingSelected from '../components/ListingSelected';
 import SearchBox from '../components/SearchBox';
 import config from '../config';
 import fetchJSONP from 'fetch-jsonp';
+import large_logo from '../images/logo_transparent_background.png';
 
 import MyFacebookLogin from '../containers/MyFacebookLogin'
 
@@ -51,6 +52,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* <button href="http://localhost:3001/sign-in-pinterest">Sign in with pinterest</button> */}
+        <img src={large_logo} className="large_logo" alt="Handy Etsy"/>
 
         <SearchBox
           onChangeSearchShop={this.handleChangeSearchShop}
