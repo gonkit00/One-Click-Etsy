@@ -1,8 +1,27 @@
 import React from "react";
 import ListingItem from './ListingItem';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
+const style = {
+  container: {
+    position: 'relative',
+  },
+  refresh: {
+    display: 'inline-block',
+    position: 'relative',
+  },
+};
 
 const renderListings = (props) => {
-  return props.listings.map(listing => (
+  return props.loading
+  ? <RefreshIndicator
+      size={40}
+      left={10}
+      top={0}
+      status="loading"
+      style={style.refresh}
+    />
+  : props.listings.map(listing => (
         <ListingItem
           key={listing.listing_id}
           listing={listing}
