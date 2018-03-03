@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import FacebookLogin from 'react-facebook-login';
 
-import * as Actions from '../actions.js';
 import config from '../config'
 import queryString from 'query-string';
 
@@ -14,17 +13,19 @@ class MyFacebookLogin extends Component {
   //TODO: post for Facebook pages
   //TODO: recognize &#39; &quot; etc characters in description
 
+  state = {facebookToken:undefined}
+
   baseUrl = 'https://graph.facebook.com/v2.12';
 
   responseFacebook = (response) => {
-    this.props.addFacebookToken(response.accessToken);
+    this.setState({facebookToken:response.accessToken})
   }
 
   publishPost = () => {
     this.props.selectedListings.forEach(listing => {
       //promises is an array of promises
       const promises = listing.Images.map(image =>
-        fetch(`${this.baseUrl}/me/photos?url=${image.url_570xN}&caption=my caption&published=false&access_token=${this.props.facebookToken}`, {
+        fetch(`${this.baseUrl}/me/photos?url=${image.url_570xN}&caption=my caption&published=false&access_token=${this.state.facebookToken}`, {
           method: "POST"
         })
         .then(res => res.json())
@@ -55,7 +56,7 @@ class MyFacebookLogin extends Component {
       .then (ids => {
         const qs = ids.map((id, index) => `attached_media[${index}]={"media_fbid":"${id}"}`).join('&');
 
-        fetch(`${this.baseUrl}/me/feed?${message}&${qs}&access_token=${this.props.facebookToken}`,
+        fetch(`${this.baseUrl}/me/feed?${message}&${qs}&access_token=${this.state.facebookToken}`,
           {
             method: "POST"
           })
@@ -66,7 +67,7 @@ class MyFacebookLogin extends Component {
   }
 
   render () {
-    if (this.props.selectedListings.length !== 0 && !this.props.facebookToken) {
+    if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
       return (
         <div className="MyFacebookLogin">
           <FacebookLogin
@@ -94,11 +95,6 @@ class MyFacebookLogin extends Component {
 
 const mapStateToProps = (state) => ({
   selectedListings: state.selectedListings,
-  facebookToken: state.facebookToken
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  addFacebookToken: token => dispatch(Actions.addFacebookToken(token))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyFacebookLogin);
+export default connect(mapStateToProps, null)(MyFacebookLogin);
