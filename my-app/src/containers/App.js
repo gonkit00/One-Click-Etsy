@@ -54,12 +54,14 @@ class App extends Component {
         {/* <button href="http://localhost:3001/sign-in-pinterest">Sign in with pinterest</button> */}
         <img src={large_logo} className="large_logo" alt="Handy Etsy"/>
 
-        <SearchBox
-          onChangeSearchShop={this.handleChangeSearchShop}
-        />
-        <SearchBox
-          onChangeSearchListings={this.handleChangeSearchListings}
-        />
+        <div className="searchArea">
+          <SearchBox
+            onChangeSearchShop={this.handleChangeSearchShop}
+          />
+          <SearchBox
+            onChangeSearchListings={this.handleChangeSearchListings}
+          />
+        </div>
         <ListingList
           listings={this.props.searchedListings}
           onSelectListing={this.handleSelectListing}
