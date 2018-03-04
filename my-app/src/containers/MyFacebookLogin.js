@@ -8,13 +8,13 @@ import queryString from 'query-string';
 
 class MyFacebookLogin extends Component {
 
-  //TODO: MyFacebookLogin: why the second json doesn't work?
   //TODO: MyFacebookLogin: when facebook login decide what is the privacy of my posts
   //TODO: MyFacebookLogin: empty the array after publishing
   //TODO: post for Facebook pages
   //TODO: recognize &#39; &quot; etc characters in description
+  //TODO: handle facebooklogin button visibility
 
-  state = {facebookToken:undefined, myFacebookLoginClass: "displayNone"}
+  state = {facebookToken:undefined}
 
   baseUrl = 'https://graph.facebook.com/v2.12';
 
@@ -72,14 +72,12 @@ class MyFacebookLogin extends Component {
     const style = {
       height: 70
     };
-    setTimeout(() => {
-      this.setState({myFacebookLoginClass: "MyFacebookLogin"})
-    }, 4000);
 
     if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
 
       return (
-        <div className={this.state.myFacebookLoginClass}>
+        //This is a workaround: check TODO
+        <div className="displayNone">
           <FacebookLogin
             appId={config.facebookAppId}
             autoLoad={true}
