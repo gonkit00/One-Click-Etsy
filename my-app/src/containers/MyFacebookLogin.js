@@ -40,8 +40,7 @@ class MyFacebookLogin extends Component {
     } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
-          <p>Share all your listings in just one click...</p>
-          {/* <RaisedButton onClick={this.publishPost} label="IT'S HANDY!" primary={true} style={style} labelStyle={{ fontSize: '30px'}} /> */}
+          <p>Share all your selected listings in one click...</p>
           <ConfirmDialog
             loading={this.state.loading}
             facebookToken={this.state.facebookToken}

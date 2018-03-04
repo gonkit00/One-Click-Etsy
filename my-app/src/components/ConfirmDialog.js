@@ -10,6 +10,8 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
  */
 export default class ConfirmDialog extends React.Component {
 
+  //TODO: error handling if facebook response is not ok
+
   state = {
     open: false,
     loading: false
@@ -132,6 +134,3 @@ export default class ConfirmDialog extends React.Component {
     );
   }
 }
-
-
-{/* <RaisedButton onClick={this.publishPost} label="IT'S HANDY!" primary={true} style={style} labelStyle={{ fontSize: '30px'}} /> */}
