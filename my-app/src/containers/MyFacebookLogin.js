@@ -70,7 +70,9 @@ class MyFacebookLogin extends Component {
   render () {
 
     const style = {
-      height: 70
+      height: 70,
+      width: 350,
+      alignSelf: "center",
     };
 
     if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
@@ -92,7 +94,7 @@ class MyFacebookLogin extends Component {
     } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
-          <p>Post all your listing in just one click...</p>
+          <p>Share all your listings in just one click...</p>
           <RaisedButton onClick={this.publishPost} label="IT'S HANDY!" primary={true} style={style} labelStyle={{ fontSize: '30px'}} />
         </div>
       )

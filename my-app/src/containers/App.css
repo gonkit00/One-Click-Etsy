@@ -35,17 +35,19 @@
   display: flex;
   justify-content: center;
   margin: 10px 0;
+  height: 276px;
 }
 .App .block.selected {
   background-color: #f3f3f3;
   padding: 10px 0;
+  height: 230px;
 }
 .App .block.listings .ListingItem{
   height: 236px;
 }
 
 .App .block .caption {
-  margin-right: 20px;
+  margin: 0 20px;
   flex: 0.3;
 }
 .App .block p {
@@ -90,8 +92,12 @@
 }
 
 .search-area {
+  /* display: flex; */
+  margin: 80px auto;
+}
+.search-area span, .block.listings span, .block.selected span {
   display: flex;
-  margin: 30px auto 20px auto;
+  justify-content: center;
 }
 
 .SearchBox {

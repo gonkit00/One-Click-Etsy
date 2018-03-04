@@ -11,6 +11,7 @@ import fetchJSONP from 'fetch-jsonp';
 import large_logo from '../images/white_logo_transparent_background.png';
 
 import MyFacebookLogin from '../containers/MyFacebookLogin'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class App extends Component {
 
@@ -51,41 +52,70 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="header">
-          <div className="image-logo">
-            <img src={large_logo} alt="Handy Etsy"/>
-
-          </div>
-        </div>
+        <CSSTransitionGroup
+          transitionName="fade-in-transition"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnter={false}
+          transitionLeave={false}>
+            <div className="header">
+              <div className="image-logo">
+                <img src={large_logo} alt="Handy Etsy"/>
+              </div>
+            </div>
+        </CSSTransitionGroup>
 
         <div className="search-area">
-          <SearchBox
-            onChangeSearchShop={this.handleChangeSearchShop}
-          />
-          <SearchBox
-            onChangeSearchListings={this.handleChangeSearchListings}
-          />
+          <CSSTransitionGroup
+            transitionName="fade-in-transition"
+            transitionAppear={true}
+            transitionAppearTimeout={1000}
+            transitionEnter={false}
+            transitionLeave={false}>
+              <SearchBox
+                onChangeSearchShop={this.handleChangeSearchShop}
+              />
+              <SearchBox
+                onChangeSearchListings={this.handleChangeSearchListings}
+              />
+          </CSSTransitionGroup>
         </div>
+
         <div className="block listings">
-          <div className="caption">
-            <p>My listings</p>
-            <small>All the listings from the shop you searched for are ordered by recency</small>
-          </div>
-          <ListingList
-            listings={this.props.searchedListings}
-            onSelectListing={this.handleSelectListing}
-          />
+          <CSSTransitionGroup
+            transitionName="fade-in-transition"
+            transitionAppear={true}
+            transitionAppearTimeout={1500}
+            transitionEnter={false}
+            transitionLeave={false}>
+              <div className="caption">
+                <p>My listings</p>
+                <small>All your listings are ordered by recency. Select the ones you want to share</small>
+              </div>
+              <ListingList
+                listings={this.props.searchedListings}
+                onSelectListing={this.handleSelectListing}
+              />
+          </CSSTransitionGroup>
         </div>
-        <div className="block selected">
-          <div className="caption">
-            <p>My selected listings</p>
-            <small>All the listings you put here are ready to be posted on Facebook</small>
-          </div>
-          <ListingSelected
-            listings={this.props.selectedListings}
-            onSelectListing={this.handleSelectListing}
-          />
-        </div>
+
+        <CSSTransitionGroup
+          transitionName="fade-in-transition"
+          transitionAppear={true}
+          transitionAppearTimeout={2000}
+          transitionEnter={false}
+          transitionLeave={false}>
+            <div className="block selected">
+              <div className="caption">
+                <p>My selected listings</p>
+                <small>All the listings you put here are ready to be shared in just one click</small>
+              </div>
+              <ListingSelected
+                listings={this.props.selectedListings}
+                onSelectListing={this.handleSelectListing}
+              />
+            </div>
+        </CSSTransitionGroup>
         <MyFacebookLogin
           selectedListings={this.props.selectedListings}
         />
