@@ -9,6 +9,8 @@ const style = {
   refresh: {
     display: 'inline-block',
     position: 'relative',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
 };
 

@@ -19,10 +19,15 @@ class App extends Component {
     this.fetchListings();
   }
 
+  state = {
+    loading: false,
+  }
+
   fetchListings = (value) => {
+    if (!this.state.loading) this.setState({loading: true});
     const baseUrl = 'https://openapi.etsy.com/v2';
-    // const shop = value;
-    const shop = 'lollycloth';
+    const shop = value;
+    // const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
 
@@ -33,6 +38,7 @@ class App extends Component {
     fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=Images&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
       .then(res => res.json())
       .then(response => this.props.addListings(response.results))
+      .then(() => this.setState({loading: false}))
   }
 
   handleSelectListing = (listing) => {
@@ -93,6 +99,7 @@ class App extends Component {
                 <small>All your listings are ordered by recency. Select the ones you want to share</small>
               </div>
               <ListingList
+                loading={this.state.loading}
                 listings={this.props.searchedListings}
                 onSelectListing={this.handleSelectListing}
               />
