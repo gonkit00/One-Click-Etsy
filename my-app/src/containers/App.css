@@ -86,7 +86,7 @@
   font-size: 1.5em;
   color: #999;
 }
-.MyFacebookLogin div {
+.MyFacebookLogin .ConfirmDialog {
   align-self: center;
 }
 .displayNone {

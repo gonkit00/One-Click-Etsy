@@ -3,7 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import queryString from 'query-string';
-
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 /**
  * A modal dialog can only be closed by selecting one of the actions.
@@ -12,11 +12,13 @@ export default class ConfirmDialog extends React.Component {
 
   state = {
     open: false,
+    loading: false
   };
 
   baseUrl = 'https://graph.facebook.com/v2.12';
 
   publishPost = () => {
+    this.setState({loading: true})
     this.props.selectedListings.forEach(listing => {
       //promises is an array of promises
       const promises = listing.Images.map(image =>
@@ -46,6 +48,7 @@ export default class ConfirmDialog extends React.Component {
       //   &access_token=${this.props.facebookToken}`, {
       //   method: "POST"
       // })
+
       //INSTEAD OF THE SCRIPT ABOVE WE USE THE FOLLOWING
       Promise.all(promises)
       .then (ids => {
@@ -55,7 +58,7 @@ export default class ConfirmDialog extends React.Component {
           {
             method: "POST"
           })
-          .then(res => console.log('Facebook Post result: ',res.ok))
+          .then(res => this.setState({loading: false}))
       })
     })
   }
@@ -69,6 +72,30 @@ export default class ConfirmDialog extends React.Component {
     this.setState({open: false});
   };
 
+  renderResult = () => {
+
+    const RefreshIndicatorStyle = {
+      container: {
+        position: 'relative',
+      },
+      refresh: {
+        display: 'inline-block',
+        position: 'relative',
+        left: -9682
+      },
+    };
+
+    return this.state.loading
+    ? <RefreshIndicator
+        size={40}
+        left={10}
+        top={0}
+        status="loading"
+        style={RefreshIndicatorStyle.refresh}
+      />
+    : <p>POSTED!</p>
+  }
+
   render() {
 
     const RaisedButtonStyle = {
@@ -79,20 +106,14 @@ export default class ConfirmDialog extends React.Component {
 
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Close"
         primary={true}
         onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        disabled={true}
-        onClick={this.handleClose}
-      />,
+      />
     ];
 
     return (
-      <div>
+      <div className="ConfirmDialog">
         <RaisedButton
           label="IT'S HANDY!"
           onClick={this.handleOpen}
@@ -100,12 +121,12 @@ export default class ConfirmDialog extends React.Component {
           style={RaisedButtonStyle}
           labelStyle={{ fontSize: '30px'}} />
         <Dialog
-          title="Dialog With Actions"
-          actions={actions}
+          title="Uploading..."
+          actions={this.state.loading ? null : actions}
           modal={true}
           open={this.state.open}
         >
-          Only actions can close this dialog.
+          {this.renderResult()}
         </Dialog>
       </div>
     );

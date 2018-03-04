@@ -2,7 +2,8 @@ import React from "react";
 import ListingItem from './ListingItem';
 
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-const style = {
+
+const RefreshIndicatorStyle = {
   container: {
     position: 'relative',
   },
@@ -22,7 +23,7 @@ const renderListings = (props) => {
       left={10}
       top={0}
       status="loading"
-      style={style.refresh}
+      style={RefreshIndicatorStyle.refresh}
     />
   : props.listings.map(listing => (
         <ListingItem
