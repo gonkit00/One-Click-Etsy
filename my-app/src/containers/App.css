@@ -38,9 +38,9 @@
   height: 276px;
 }
 .App .block.selected {
-  background-color: #f3f3f3;
   padding: 10px 0;
   height: 230px;
+  background-color: #f3f3f3;
 }
 .App .block.listings .ListingItem{
   height: 236px;
@@ -95,7 +95,8 @@
   /* display: flex; */
   margin: 80px auto;
 }
-.search-area span, .block.listings span, .block.selected span {
+.search-area span, .block.listings span,
+.block.selected span {
   display: flex;
   justify-content: center;
 }

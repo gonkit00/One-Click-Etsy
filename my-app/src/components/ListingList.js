@@ -1,7 +1,7 @@
 import React from "react";
 import ListingItem from './ListingItem';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
 
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 const style = {
   container: {
     position: 'relative',
@@ -10,7 +10,8 @@ const style = {
     display: 'inline-block',
     position: 'relative',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    top: -9934
   },
 };
 

@@ -4,7 +4,7 @@ const initialState = {
   listings:[],
   selectedListings:[],
   searchedListings:[],
-  searchedShop:[],
+  // searchedShop:[],
 }
 
 const reducer = (state = initialState, action) => {

@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
+import fetchJSONP from 'fetch-jsonp';
+import { CSSTransitionGroup } from 'react-transition-group'
+import debounce from 'debounce';
+
 import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
+import MyFacebookLogin from '../containers/MyFacebookLogin'
 import SearchBox from '../components/SearchBox';
 import config from '../config';
-import fetchJSONP from 'fetch-jsonp';
+
 // import large_logo from '../images/logo_transparent_background.png';
 import large_logo from '../images/white_logo_transparent_background.png';
 
-import MyFacebookLogin from '../containers/MyFacebookLogin'
-import { CSSTransitionGroup } from 'react-transition-group'
 
 class App extends Component {
 
@@ -26,13 +29,12 @@ class App extends Component {
   fetchListings = (value) => {
     if (!this.state.loading) this.setState({loading: true});
     const baseUrl = 'https://openapi.etsy.com/v2';
-    const shop = value;
-    // const shop = 'lollycloth';
+    // const shop = value;
+    const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
 
-    //TODO: handle the limit/pagination
-    //TODO: add fetch loader
+    //TODO: debug debounce
 
     //After installing npm fetch-jsonp I can use JSONP recommended by Etsy to not have problems with cross requests
     fetchJSONP(`${baseUrl}/shops/${shop}/listings/active.js?includes=Images&&limit=${limit}&offset=${offset}&&api_key=${config.etsyApiKey}`)
@@ -50,7 +52,8 @@ class App extends Component {
   }
 
   handleChangeSearchShop = (e) => {
-    this.fetchListings(e.target.value);
+    // debounce(() => {this.fetchListings(e.target.value)}, 1000);
+    this.fetchListings(e.target.value)
   }
 
   render() {
@@ -75,10 +78,11 @@ class App extends Component {
           <CSSTransitionGroup
             transitionName="fade-in-transition"
             transitionAppear={true}
-            transitionAppearTimeout={1000}
+            transitionAppearTimeout={500}
             transitionEnter={false}
             transitionLeave={false}>
               <SearchBox
+                // onChangeSearchShop={debounce(this.handleChangeSearchShop, 1000)}
                 onChangeSearchShop={this.handleChangeSearchShop}
               />
               <SearchBox
@@ -91,7 +95,7 @@ class App extends Component {
           <CSSTransitionGroup
             transitionName="fade-in-transition"
             transitionAppear={true}
-            transitionAppearTimeout={1500}
+            transitionAppearTimeout={500}
             transitionEnter={false}
             transitionLeave={false}>
               <div className="caption">
@@ -106,13 +110,13 @@ class App extends Component {
           </CSSTransitionGroup>
         </div>
 
-        <CSSTransitionGroup
-          transitionName="fade-in-transition"
-          transitionAppear={true}
-          transitionAppearTimeout={2000}
-          transitionEnter={false}
-          transitionLeave={false}>
-            <div className="block selected">
+        <div className="block selected">
+          <CSSTransitionGroup
+            transitionName="fade-in-transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
               <div className="caption">
                 <p>My selected listings</p>
                 <small>All the listings you put here are ready to be shared in just one click</small>
@@ -121,8 +125,8 @@ class App extends Component {
                 listings={this.props.selectedListings}
                 onSelectListing={this.handleSelectListing}
               />
-            </div>
-        </CSSTransitionGroup>
+          </CSSTransitionGroup>
+        </div>
         <MyFacebookLogin
           selectedListings={this.props.selectedListings}
         />
