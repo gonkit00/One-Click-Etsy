@@ -69,11 +69,11 @@ class MyFacebookLogin extends Component {
 
   render () {
 
-    const style = {
-      height: 70,
-      width: 350,
-      alignSelf: "center",
-    };
+    // const style = {
+    //   height: 70,
+    //   width: 350,
+    //   alignSelf: "center",
+    // };
 
     if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
 

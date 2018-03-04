@@ -70,6 +70,13 @@ export default class ConfirmDialog extends React.Component {
   };
 
   render() {
+
+    const RaisedButtonStyle = {
+      height: 70,
+      width: 350,
+      alignSelf: "center",
+    };
+
     const actions = [
       <FlatButton
         label="Cancel"
@@ -86,7 +93,12 @@ export default class ConfirmDialog extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="IT'S HANDY!" onClick={this.handleOpen} />
+        <RaisedButton
+          label="IT'S HANDY!"
+          onClick={this.handleOpen}
+          primary={true}
+          style={RaisedButtonStyle}
+          labelStyle={{ fontSize: '30px'}} />
         <Dialog
           title="Dialog With Actions"
           actions={actions}
