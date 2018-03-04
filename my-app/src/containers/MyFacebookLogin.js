@@ -14,7 +14,7 @@ class MyFacebookLogin extends Component {
   //TODO: post for Facebook pages
   //TODO: recognize &#39; &quot; etc characters in description
 
-  state = {facebookToken:undefined}
+  state = {facebookToken:undefined, myFacebookLoginClass: "displayNone"}
 
   baseUrl = 'https://graph.facebook.com/v2.12';
 
@@ -72,11 +72,14 @@ class MyFacebookLogin extends Component {
     const style = {
       height: 70
     };
+    setTimeout(() => {
+      this.setState({myFacebookLoginClass: "MyFacebookLogin"})
+    }, 4000);
 
     if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
 
       return (
-        <div className="MyFacebookLogin">
+        <div className={this.state.myFacebookLoginClass}>
           <FacebookLogin
             appId={config.facebookAppId}
             autoLoad={true}

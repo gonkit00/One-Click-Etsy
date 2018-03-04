@@ -85,6 +85,9 @@
   font-size: 1.5em;
   color: #999;
 }
+.displayNone {
+  display: none;
+}
 
 .search-area {
   display: flex;
