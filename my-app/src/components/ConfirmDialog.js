@@ -95,7 +95,7 @@ export default class ConfirmDialog extends React.Component {
         status="loading"
         style={RefreshIndicatorStyle.refresh}
       />
-    : <p>POSTED!</p>
+    : <p>DONE IT!</p>
   }
 
   render() {
@@ -123,7 +123,7 @@ export default class ConfirmDialog extends React.Component {
           style={RaisedButtonStyle}
           labelStyle={{ fontSize: '30px'}} />
         <Dialog
-          title="Uploading..."
+          title="Posting..."
           actions={this.state.loading ? null : actions}
           modal={true}
           open={this.state.open}
