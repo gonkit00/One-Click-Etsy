@@ -8,7 +8,7 @@ import debounce from 'debounce';
 import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
-import MyFacebookLogin from '../containers/MyFacebookLogin'
+import MyFacebookLogin from './MyFacebookLogin'
 import SearchBox from '../components/SearchBox';
 import config from '../config';
 
@@ -127,10 +127,7 @@ class App extends Component {
               />
           </CSSTransitionGroup>
         </div>
-        <MyFacebookLogin
-          selectedListings={this.props.selectedListings}
-        />
-
+        <MyFacebookLogin/>
       </div>
     );
   }

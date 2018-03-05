@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 // import queryString from 'query-string';
 
 import config from '../config'
-import ConfirmDialog from '../components/ConfirmDialog'
+import ConfirmDialog from './ConfirmDialog'
 
 class MyFacebookLogin extends Component {
 
@@ -44,7 +44,6 @@ class MyFacebookLogin extends Component {
           <ConfirmDialog
             loading={this.state.loading}
             facebookToken={this.state.facebookToken}
-            selectedListings={this.props.selectedListings}
           />
         </div>
       )

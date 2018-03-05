@@ -4,11 +4,12 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import queryString from 'query-string';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import { connect } from 'react-redux';
 
 /**
  * A modal dialog can only be closed by selecting one of the actions.
  */
-export default class ConfirmDialog extends React.Component {
+class ConfirmDialog extends React.Component {
 
   //TODO: error handling if facebook response is not ok
 
@@ -134,3 +135,9 @@ export default class ConfirmDialog extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  selectedListings: state.selectedListings,
+});
+
+export default connect(mapStateToProps, null)(ConfirmDialog);
