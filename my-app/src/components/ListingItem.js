@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 import './ListingItem.css';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 

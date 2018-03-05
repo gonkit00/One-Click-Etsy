@@ -8,13 +8,14 @@ const style = {
 }
 
 const SearchBox = (props) => {
-  
+
   const callOnSearch = (e) => {
     props.onChangeSearchShop
     ? props.onChangeSearchShop(e)
     : props.onChangeSearchListings(e);
   }
 
+  //debounce return a function, doesn't invoke it!
   const onChangeDebounced = debounce(callOnSearch, props.debounceTime);
 
   const onChange = (e) => {

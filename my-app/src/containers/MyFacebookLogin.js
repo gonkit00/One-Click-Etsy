@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import FacebookLogin from 'react-facebook-login';
-import RaisedButton from 'material-ui/RaisedButton';
 // import queryString from 'query-string';
 
 import config from '../config'

@@ -54,31 +54,33 @@ class App extends Component {
     this.fetchListings(e.target.value);
   };
 
+  wrapInCssTransitionGroup = (codeToWrap) => (
+    <CSSTransitionGroup
+      transitionName="fade-in-transition"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={false}>
+      {codeToWrap}
+    </CSSTransitionGroup>
+  )
+
   render() {
     // console.log('Fetch in App: ', this.props.listings);
 
     return (
       <div className="App">
-        <CSSTransitionGroup
-          transitionName="fade-in-transition"
-          transitionAppear={true}
-          transitionAppearTimeout={500}
-          transitionEnter={false}
-          transitionLeave={false}>
-            <div className="header">
-              <div className="image-logo">
-                <img src={large_logo} alt="Handy Etsy"/>
-              </div>
+        {this.wrapInCssTransitionGroup(
+          <div className="header">
+            <div className="image-logo">
+              <img src={large_logo} alt="Handy Etsy"/>
             </div>
-        </CSSTransitionGroup>
+          </div>
+        )}
 
         <div className="search-area">
-          <CSSTransitionGroup
-            transitionName="fade-in-transition"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnter={false}
-            transitionLeave={false}>
+          {this.wrapInCssTransitionGroup(
+            <span>
               <SearchBox
                 debounceTime={400}
                 onChangeSearchShop={this.handleChangeSearchShop}
@@ -86,16 +88,13 @@ class App extends Component {
               <SearchBox
                 onChangeSearchListings={this.handleChangeSearchListings}
               />
-          </CSSTransitionGroup>
+            </span>
+          )}
         </div>
 
         <div className="block listings">
-          <CSSTransitionGroup
-            transitionName="fade-in-transition"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnter={false}
-            transitionLeave={false}>
+          {this.wrapInCssTransitionGroup(
+            <span>
               <div className="caption">
                 <p>My listings</p>
                 <small>All your listings are ordered by recency. Select the ones you want to share</small>
@@ -105,16 +104,13 @@ class App extends Component {
                 listings={this.props.searchedListings}
                 onSelectListing={this.handleSelectListing}
               />
-          </CSSTransitionGroup>
+            </span>
+          )}
         </div>
 
         <div className="block selected">
-          <CSSTransitionGroup
-            transitionName="fade-in-transition"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnter={false}
-            transitionLeave={false}>
+          {this.wrapInCssTransitionGroup(
+            <span>
               <div className="caption">
                 <p>My selected listings</p>
                 <small>All the listings you put here are ready to be shared in just one click</small>
@@ -123,7 +119,8 @@ class App extends Component {
                 listings={this.props.selectedListings}
                 onSelectListing={this.handleSelectListing}
               />
-          </CSSTransitionGroup>
+            </span>
+          )}
         </div>
         <MyFacebookLogin/>
       </div>

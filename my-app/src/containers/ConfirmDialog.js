@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 /**
  * A modal dialog can only be closed by selecting one of the actions.
  */
-class ConfirmDialog extends React.Component {
+class ConfirmDialog extends Component {
 
   //TODO: error handling if facebook response is not ok
 
