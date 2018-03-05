@@ -1,18 +1,42 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import debounce from 'debounce';
 
 const style = {
   fontSize: 30,
   height: 80
 }
 
-export default (props) => (
-  <div className="SearchBox">
-    <TextField
-      hintText=""
-      floatingLabelText={props.onChangeSearchShop ? "My shop is " : "Search my listings "}
-      onChange={props.onChangeSearchShop ? props.onChangeSearchShop : props.onChangeSearchListings}
-      style={style}
-    />
-  </div>
-)
+const SearchBox = (props) => {
+  
+  const callOnSearch = (e) => {
+    props.onChangeSearchShop
+    ? props.onChangeSearchShop(e)
+    : props.onChangeSearchListings(e);
+  }
+
+  const onChangeDebounced = debounce(callOnSearch, props.debounceTime);
+
+  const onChange = (e) => {
+    if(props.debounceTime) {
+      //we persist the event, otherwise when debounce wait the event has gone!
+      e.persist();
+      onChangeDebounced(e);
+    } else {
+      callOnSearch(e);
+    }
+  }
+
+  return (
+    <div className="SearchBox">
+      <TextField
+        hintText=""
+        floatingLabelText={props.onChangeSearchShop ? "My shop is " : "Search my listings "}
+        onChange={onChange}
+        style={style}
+      />
+    </div>
+  )
+}
+
+export default SearchBox

@@ -3,7 +3,6 @@ import './App.css';
 import { connect } from 'react-redux';
 import fetchJSONP from 'fetch-jsonp';
 import { CSSTransitionGroup } from 'react-transition-group'
-import debounce from 'debounce';
 
 import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
@@ -29,8 +28,8 @@ class App extends Component {
   fetchListings = (value) => {
     if (!this.state.loading) this.setState({loading: true});
     const baseUrl = 'https://openapi.etsy.com/v2';
-    // const shop = value;
-    const shop = 'lollycloth';
+    const shop = value;
+    // const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
 
@@ -52,9 +51,8 @@ class App extends Component {
   }
 
   handleChangeSearchShop = (e) => {
-    // debounce(() => {this.fetchListings(e.target.value)}, 1000);
-    this.fetchListings(e.target.value)
-  }
+    this.fetchListings(e.target.value);
+  };
 
   render() {
     // console.log('Fetch in App: ', this.props.listings);
@@ -82,7 +80,7 @@ class App extends Component {
             transitionEnter={false}
             transitionLeave={false}>
               <SearchBox
-                // onChangeSearchShop={debounce(this.handleChangeSearchShop, 1000)}
+                debounceTime={400}
                 onChangeSearchShop={this.handleChangeSearchShop}
               />
               <SearchBox
