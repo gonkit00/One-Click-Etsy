@@ -6,7 +6,10 @@ const initialState = {
   searchedListings:[],
   // searchedShop:[],
   facebookToken: undefined,
-  twitterToken: undefined
+  twitterToken: {
+    token: '3131618445-bMrpeYAgDYGqMcjyo4Yhawk4nNAcsblEzv2Mywe',
+    secret: 'MyzNrUGQqS1ShXk4xvdhARlIejwz6nuiYffvUlX7OYJ7d'
+  }
 }
 
 const reducer = (state = initialState, action) => {

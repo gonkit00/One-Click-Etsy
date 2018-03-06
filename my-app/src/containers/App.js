@@ -31,7 +31,7 @@ class App extends Component {
     const baseUrl = 'https://openapi.etsy.com/v2';
     // const shop = value;
     const shop = 'lollycloth';
-    const limit = 30;
+    const limit = 50;
     const offset = 0;
 
     //TODO: debug debounce

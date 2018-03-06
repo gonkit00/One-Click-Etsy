@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import queryString from 'query-string';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import { connect } from 'react-redux';
+import qs from 'qs'
 
 /**
  * A modal dialog can only be closed by selecting one of the actions.
@@ -32,7 +33,7 @@ class ConfirmDialog extends Component {
         .then(res => res.id)
       )
 
-      const description = listing.description.split('.').filter((el, index) => {
+      const facebookDescription = listing.description.split('.').filter((el, index) => {
         return index < 3
       }).join('.');
 
@@ -40,7 +41,7 @@ class ConfirmDialog extends Component {
         return index < 3
       }).map(tag => {return '#'+tag.split(' ').join('')}).join(' ');
 
-      let message = {message: description + '\n\n' + tags};
+      let message = {message: facebookDescription + '\n\n' + tags};
       message = queryString.stringify(message, {encode: true});
 
       // fetch(`${this.baseUrl}/me/feed
@@ -65,6 +66,21 @@ class ConfirmDialog extends Component {
         })
         .then(res => this.setState({loading: false}))
       })
+
+      //Twitter
+      let twitterDescription = facebookDescription.split('.').filter((el, i) => {
+        return i < 1
+      }).join(' ') + '\n' + tags;
+      twitterDescription = queryString.stringify({text: twitterDescription})
+      fetch(`http://localhost:3001/auth/twitter?${twitterDescription}`, {
+          headers: {
+          'token' : this.props.twitterToken.token,
+          'tokensecret' : this.props.twitterToken.secret,
+        },
+        method: 'POST'
+      })
+        .then(res => console.log(res));
+
     })
   }
 
@@ -140,6 +156,8 @@ class ConfirmDialog extends Component {
 
 const mapStateToProps = (state) => ({
   selectedListings: state.selectedListings,
+  facebookToken: state.facebookToken,
+  twitterToken: state.twitterToken
 });
 
 export default connect(mapStateToProps, null)(ConfirmDialog);

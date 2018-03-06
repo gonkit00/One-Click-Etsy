@@ -39,7 +39,7 @@ class MyFacebookLogin extends Component {
       return (
         <div className="MyFacebookLogin">
           <p>Share all your selected listings in just...</p>
-          <ConfirmDialog facebookToken={this.props.facebookToken} />
+          <ConfirmDialog />
         </div>
       )
     } else {

@@ -14,7 +14,7 @@ class MyTwitterLogin extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addTwitterToken: (token) => dispatch(Actions.addTwitterToken(token))
+  addTwitterToken: (token, secret) => dispatch(Actions.addTwitterToken(token, secret))
 });
 
 const mapStateToProps = (state) => ({
