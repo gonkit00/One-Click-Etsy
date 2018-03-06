@@ -28,8 +28,8 @@ class App extends Component {
   fetchListings = (value) => {
     if (!this.state.loading) this.setState({loading: true});
     const baseUrl = 'https://openapi.etsy.com/v2';
-    const shop = value;
-    // const shop = 'lollycloth';
+    // const shop = value;
+    const shop = 'lollycloth';
     const limit = 30;
     const offset = 0;
 

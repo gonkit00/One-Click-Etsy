@@ -57,11 +57,13 @@ class ConfirmDialog extends Component {
       .then (ids => {
         const qs = ids.map((id, index) => `attached_media[${index}]={"media_fbid":"${id}"}`).join('&');
 
-        fetch(`${this.baseUrl}/me/feed?${message}&${qs}&access_token=${this.props.facebookToken}`,
-          {
-            method: "POST"
-          })
-          .then(res => this.setState({loading: false}))
+        fetch(`${this.baseUrl}/me/feed?${message}&${qs}&access_token=${this.props.facebookToken}`, {
+        //   headers: {
+        //   'content-type': 'text/plain'
+        // },
+          method: "POST"
+        })
+        .then(res => this.setState({loading: false}))
       })
     })
   }

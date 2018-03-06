@@ -1,0 +1,30 @@
+{
+  "name": "easyetsy-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "encode-3986": "^1.0.0",
+    "kcors": "^2.2.1",
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.1.0",
+    "koa-passport": "^4.0.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.1",
+    "oauth": "^0.9.15",
+    "passport-twitter": "^1.0.4",
+    "qs": "^6.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
