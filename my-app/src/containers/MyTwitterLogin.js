@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  // selectedListings: state.selectedListings,
   twitterToken: state.twitterToken
 });
 

@@ -1,5 +1,7 @@
 const OAuth = require('oauth')
 
+//TODO: to be completed.
+
 exports.reqToken = async ctx => {
   try {
     const OAuth2 = OAuth.OAuth2;

@@ -77,20 +77,6 @@ exports.postTweet = async ctx => {
   //     console.log(data);
   // });
 
-  //OR
-
-  // const client = new Twitter({
-  //   consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  //   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  //   access_token_key: token,
-  //   access_token_secret: tokenSecret
-  // });
-  // client.post('statuses/update', {status: tweet},  function(error, tweet, response) {
-  //   if(error) throw error;
-  //   console.log(tweet);  // Tweet body.
-  //   console.log(response);  // Raw response object.
-  // });
-
   //POST A MEDIA
 
   // console.log('ctx.query.mediaUrl: ', ctx.query.mediaUrl);
@@ -116,7 +102,7 @@ exports.postTweet = async ctx => {
   });
 
   // Load your image
-  const body = await request.get(ctx.query.mediaUrl);
+  const body = request.get(ctx.query.mediaUrl);
 
   // Make post request on media endpoint. Pass file data as media parameter
   const media = await client.post('media/upload', {media: body})

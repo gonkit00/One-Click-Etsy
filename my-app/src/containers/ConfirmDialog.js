@@ -58,20 +58,16 @@ class ConfirmDialog extends Component {
         const qs = ids.map((id, index) => `attached_media[${index}]={"media_fbid":"${id}"}`).join('&');
 
         fetch(`${this.baseUrl}/me/feed?${message}&${qs}&access_token=${this.props.facebookToken}`, {
-        //   headers: {
-        //   'content-type': 'text/plain'
-        // },
           method: "POST"
         })
         .then(res => this.setState({loading: false}))
       })
 
       //Twitter
-      let twitterDescription = facebookDescription.split('.').filter((el, i) => {
-        return i < 1
-      }).join(' ') + '\n' + tags;
+      let twitterDescription = facebookDescription.split(' ').filter((el, i) => {
+        return i < 40
+      }).join(' ') + '...\n' + tags;
       twitterDescription = queryString.stringify({text: twitterDescription});
-      console.log(listing.Images);
       const twitterMediaUrl = listing.Images[0].url_570xN;
       fetch(`http://localhost:3001/auth/twitter?${twitterDescription}&mediaUrl=${twitterMediaUrl}`, {
           headers: {
