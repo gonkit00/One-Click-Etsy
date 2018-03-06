@@ -120,7 +120,7 @@ class ConfirmDialog extends Component {
     return (
       <div className="ConfirmDialog">
         <RaisedButton
-          label="IT'S HANDY!"
+          label="ONE CLICK!"
           onClick={this.handleOpen}
           primary={true}
           style={RaisedButtonStyle}

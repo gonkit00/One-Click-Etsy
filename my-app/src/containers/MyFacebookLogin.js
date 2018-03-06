@@ -19,7 +19,6 @@ class MyFacebookLogin extends Component {
   }
 
   render () {
-    console.log(this.props.facebookToken);
 
     if (this.props.selectedListings.length !== 0 && !this.props.facebookToken) {
 
@@ -39,7 +38,7 @@ class MyFacebookLogin extends Component {
     } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
-          <p>Share all your selected listings in one click...</p>
+          <p>Share all your selected listings in just...</p>
           <ConfirmDialog facebookToken={this.props.facebookToken} />
         </div>
       )

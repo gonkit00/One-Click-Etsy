@@ -5,7 +5,8 @@ const initialState = {
   selectedListings:[],
   searchedListings:[],
   // searchedShop:[],
-  facebookToken: undefined
+  facebookToken: undefined,
+  twitterToken: undefined
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         facebookToken: action.token
+      }
+
+    case 'ADD_TWITTER_TOKEN':
+      return {
+        ...state,
+        twitterToken: action.token
       }
 
     default:

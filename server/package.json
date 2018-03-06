@@ -20,9 +20,11 @@
     "koa-passport": "^4.0.1",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
+    "node-fetch": "^2.1.1",
     "oauth": "^0.9.15",
     "passport-twitter": "^1.0.4",
-    "qs": "^6.5.1"
+    "qs": "^6.5.1",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.1"

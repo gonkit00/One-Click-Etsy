@@ -8,6 +8,7 @@ import * as Actions from '../actions.js';
 import ListingList from '../components/ListingList';
 import ListingSelected from '../components/ListingSelected';
 import MyFacebookLogin from './MyFacebookLogin'
+import MyTwitterLogin from './MyTwitterLogin'
 import SearchBox from '../components/SearchBox';
 import config from '../config';
 
@@ -123,6 +124,7 @@ class App extends Component {
           )}
         </div>
         <MyFacebookLogin />
+        <MyTwitterLogin />
       </div>
     );
   }

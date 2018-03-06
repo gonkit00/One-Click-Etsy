@@ -31,8 +31,7 @@ const SearchBox = (props) => {
   return (
     <div className="SearchBox">
       <TextField
-        hintText=""
-        floatingLabelText={props.onChangeSearchShop ? "My shop is " : "Search my listings "}
+        hintText=""        floatingLabelText={props.onChangeSearchShop ? "My shop is" : "My listings are "}
         onChange={onChange}
         style={style}
       />

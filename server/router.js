@@ -8,13 +8,10 @@ const createRouter = (passport) => {
 
   // router.get('/auth/twitter', twitter.reqToken)
 
-  //It gets to ./passport/twitter
   router.get('/auth/twitter', passport.authenticate('twitter'))
-
-  //It gets to ./controllers/twitter
   router.get('/auth/twitter/callback', twitter.getToken)
-  
-  // router.post('/noauth/twitter', twitter.postTweet)
+
+  router.post('/auth/twitter', twitter.postTweet)
 
   return router;
 }

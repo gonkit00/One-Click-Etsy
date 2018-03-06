@@ -17,3 +17,8 @@ export const addFacebookToken = (token) => ({
   type: 'ADD_FACEBOOK_TOKEN',
   token
 });
+
+export const addTwitterToken = (token) => ({
+  type: 'ADD_TWITTER_TOKEN',
+  token
+});

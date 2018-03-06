@@ -1,3 +1,5 @@
+//THIS IS NOT A CONTROLLER, IT'S JUST THE STRATEGY!
+
 const TwitterStrategy = require('passport-twitter');
 
 module.exports = new TwitterStrategy({
