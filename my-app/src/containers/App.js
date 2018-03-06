@@ -122,7 +122,7 @@ class App extends Component {
             </span>
           )}
         </div>
-        <MyFacebookLogin/>
+        <MyFacebookLogin />
       </div>
     );
   }

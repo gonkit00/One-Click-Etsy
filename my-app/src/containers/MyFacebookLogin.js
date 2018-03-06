@@ -5,6 +5,7 @@ import FacebookLogin from 'react-facebook-login';
 
 import config from '../config'
 import ConfirmDialog from './ConfirmDialog'
+import * as Actions from '../actions.js';
 
 class MyFacebookLogin extends Component {
 
@@ -13,15 +14,14 @@ class MyFacebookLogin extends Component {
   //TODO: post for Facebook PAGES
   //TODO: recognize &#39; &quot; etc characters in description
 
-  state = {facebookToken:undefined}
-
   responseFacebook = (response) => {
-    this.setState({facebookToken:response.accessToken})
+    this.props.addFacebookToken(response.accessToken)
   }
 
   render () {
+    console.log(this.props.facebookToken);
 
-    if (this.props.selectedListings.length !== 0 && !this.state.facebookToken) {
+    if (this.props.selectedListings.length !== 0 && !this.props.facebookToken) {
 
       return (
         <div className="MyFacebookLogin">
@@ -40,10 +40,7 @@ class MyFacebookLogin extends Component {
       return (
         <div className="MyFacebookLogin">
           <p>Share all your selected listings in one click...</p>
-          <ConfirmDialog
-            loading={this.state.loading}
-            facebookToken={this.state.facebookToken}
-          />
+          <ConfirmDialog facebookToken={this.props.facebookToken} />
         </div>
       )
     } else {
@@ -52,8 +49,13 @@ class MyFacebookLogin extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedListings: state.selectedListings,
+const mapDispatchToProps = (dispatch) => ({
+  addFacebookToken: (token) => dispatch(Actions.addFacebookToken(token))
 });
 
-export default connect(mapStateToProps, null)(MyFacebookLogin);
+const mapStateToProps = (state) => ({
+  selectedListings: state.selectedListings,
+  facebookToken: state.facebookToken
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyFacebookLogin);

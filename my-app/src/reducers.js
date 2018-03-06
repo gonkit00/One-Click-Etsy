@@ -5,6 +5,7 @@ const initialState = {
   selectedListings:[],
   searchedListings:[],
   // searchedShop:[],
+  facebookToken: undefined
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchedListings: state.listings.filter(listing => listing.title.toLowerCase().includes(action.searchText))
+      }
+
+    case 'ADD_FACEBOOK_TOKEN':
+      return {
+        ...state,
+        facebookToken: action.token
       }
 
     default:
