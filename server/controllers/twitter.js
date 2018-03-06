@@ -1,7 +1,10 @@
 const OAuth = require('oauth')
 const encode = require('encode-3986')
 const qs = require('qs');
-const twitterPassport = require('../passport/twitter')
+const twitterPassport = require('../passport/twitter');
+const fetch = require('node-fetch');
+const Twitter = require('twitter');
+const request = require('request')
 
 //I'm not using it, instead I'm using Passport. I kept it just for learning purposes. How to use ctx.body with async/await instead of callbacks
 // exports.reqToken = async ctx => {
@@ -45,8 +48,8 @@ exports.getToken = async ctx => {
 exports.postTweet = async ctx => {
   const token = ctx.req.headers.token;
   const tokenSecret = ctx.req.headers.tokensecret;
-  const tweet = ctx.request.body.text;
-  const mediaUrl = ctx.request.body.mediaUrl;
+  const tweet = ctx.query.text;
+  const mediaUrl = ctx.query.mediaUrl;
   console.log(token, tokenSecret, tweet, mediaUrl);
 
   const oauth = new OAuth.OAuth(
@@ -59,27 +62,42 @@ exports.postTweet = async ctx => {
     'HMAC-SHA1'
   );
 
-  //Post a STATUS
-  const encodedTweet = encode(ctx.query.text);
-  oauth.post(
-    `https://api.twitter.com/1.1/statuses/update.json?status=${encodedTweet}`,
-    token, //test user token
-    tokenSecret, //test user secret
-    // '3131618445-bMrpeYAgDYGqMcjyo4Yhawk4nNAcsblEzv2Mywe', //test user token
-    // 'MyzNrUGQqS1ShXk4xvdhARlIejwz6nuiYffvUlX7OYJ7d', //test user secret
-    null,
-    null,
-    (e, data, res) => {
-      if (e) console.error(e);
-      console.log(data);
-  });
-
-  //Post a MEDIA
-  // let img = await fetch(ctx.query.mediaUrl)
-  // imgBin = await img.blob()
-  // console.log(ctx.query.mediaUrl);
+  //POST A STATUS
+  // const encodedTweet = encode(tweet);
   // oauth.post(
-  //   `https://upload.twitter.com/1.1/media/upload.json?media=${imgBin}`,
+  //   `https://api.twitter.com/1.1/statuses/update.json?status=${encodedTweet}`,
+  //   token, //test user token
+  //   tokenSecret, //test user secret
+  //   // '3131618445-bMrpeYAgDYGqMcjyo4Yhawk4nNAcsblEzv2Mywe', //test user token
+  //   // 'MyzNrUGQqS1ShXk4xvdhARlIejwz6nuiYffvUlX7OYJ7d', //test user secret
+  //   null,
+  //   null,
+  //   (e, data, res) => {
+  //     if (e) console.error(e);
+  //     console.log(data);
+  // });
+
+  //OR
+
+  // const client = new Twitter({
+  //   consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  //   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  //   access_token_key: token,
+  //   access_token_secret: tokenSecret
+  // });
+  // client.post('statuses/update', {status: tweet},  function(error, tweet, response) {
+  //   if(error) throw error;
+  //   console.log(tweet);  // Tweet body.
+  //   console.log(response);  // Raw response object.
+  // });
+
+  //POST A MEDIA
+
+  // console.log('ctx.query.mediaUrl: ', ctx.query.mediaUrl);
+  // oauth.post(
+  //   `https://upload.twitter.com/1.1/media/upload.json?media=${imgBlob}`,
+  //   // token, //test user token
+  //   // tokenSecret, //test user secret
   //   '3131618445-bMrpeYAgDYGqMcjyo4Yhawk4nNAcsblEzv2Mywe', //test user token
   //   'MyzNrUGQqS1ShXk4xvdhARlIejwz6nuiYffvUlX7OYJ7d', //test user secret
   //   null,
@@ -89,16 +107,29 @@ exports.postTweet = async ctx => {
   //     console.log(data);
   // });
 
-  // const client = new Twitter({
-  //   consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  //   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  //   access_token_key: 'FWAQaibFJzWdc5DWAvMQJ5qMB',
-  //   access_token_secret: 'XRwsbwbJ84MlMtWg4XvXBAt7fLOZ8HFys5WA6YVZD3gQrxF4iR'
-  // });
-  //
-  // client.get('favorites/list', function(error, tweets, response) {
-  //   if(error) throw error;
-  //   console.log(tweets);  // The favorites.
-  //   console.log(response);  // Raw response object.
-  // });
+  //OR A MEDIA WITH A STATUS
+  const client = new Twitter({
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token_key: token,
+    access_token_secret: tokenSecret
+  });
+
+  // Load your image
+  const body = await request.get(ctx.query.mediaUrl);
+
+  // Make post request on media endpoint. Pass file data as media parameter
+  const media = await client.post('media/upload', {media: body})
+
+  //Lets tweet it
+  const status = {
+    status: tweet,
+    media_ids: media.media_id_string // Pass the media id string
+  }
+
+  const tweetResponse = await client.post('statuses/update', status);
+
+  ctx.status = 200;
+  ctx.body = tweetResponse;
+
 }

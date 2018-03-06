@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import queryString from 'query-string';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import { connect } from 'react-redux';
-import qs from 'qs'
 
 /**
  * A modal dialog can only be closed by selecting one of the actions.
@@ -71,12 +70,14 @@ class ConfirmDialog extends Component {
       let twitterDescription = facebookDescription.split('.').filter((el, i) => {
         return i < 1
       }).join(' ') + '\n' + tags;
-      twitterDescription = queryString.stringify({text: twitterDescription})
-      fetch(`http://localhost:3001/auth/twitter?${twitterDescription}`, {
+      twitterDescription = queryString.stringify({text: twitterDescription});
+      console.log(listing.Images);
+      const twitterMediaUrl = listing.Images[0].url_570xN;
+      fetch(`http://localhost:3001/auth/twitter?${twitterDescription}&mediaUrl=${twitterMediaUrl}`, {
           headers: {
-          'token' : this.props.twitterToken.token,
-          'tokensecret' : this.props.twitterToken.secret,
-        },
+            'token' : this.props.twitterToken.token,
+            'tokensecret' : this.props.twitterToken.secret,
+          },
         method: 'POST'
       })
         .then(res => console.log(res));

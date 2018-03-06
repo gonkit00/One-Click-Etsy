@@ -38,7 +38,7 @@ class MyFacebookLogin extends Component {
     } else if (this.props.selectedListings.length !== 0) {
       return (
         <div className="MyFacebookLogin">
-          <p>Share all your selected listings in just...</p>
+          <p>Share all your selected listings just in...</p>
           <ConfirmDialog />
         </div>
       )

@@ -114,7 +114,7 @@ class App extends Component {
             <span>
               <div className="caption">
                 <p>My selected listings</p>
-                <small>All the listings you put here are ready to be shared in just one click</small>
+                <small>All the listings you put here are ready to be shared just in one click</small>
               </div>
               <ListingSelected
                 listings={this.props.selectedListings}
