@@ -41,4 +41,3 @@ Start the frontend using npm start from "./my-app"
 ```
 npm start
 ```
-
