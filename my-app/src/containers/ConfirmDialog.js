@@ -65,7 +65,7 @@ class ConfirmDialog extends Component {
 
       //Twitter
       let twitterDescription = facebookDescription.split(' ').filter((el, i) => {
-        return i < 40
+        return i < 25
       }).join(' ') + '...\n' + tags;
       twitterDescription = queryString.stringify({text: twitterDescription});
       const twitterMediaUrl = listing.Images[0].url_570xN;
