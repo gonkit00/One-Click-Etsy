@@ -2,9 +2,9 @@
  <img width= "232px" src="https://github.com/gonkit00/One-Click-Etsy/blob/master/branding/Logos_ByTailorBrands%202/white_logo_color_background.jpg?raw=true"></img>
 </div>
 
-One Click Etsy is a web app that makes it possible for people to share one or more listings from Etsy to Facebook, Twitter and Pinterest just in one click.
+One Click Etsy is a web app I developed that makes it possible for people to share one or more listings from Etsy to Facebook, Twitter and Pinterest just in one click.
 
-The purpose of One Click Etsy is to make the promoting process easier especially for sellers on Etsy who doesn't have time to care of it.
+The purpose of One Click Etsy is to make the promoting process easier especially for sellers on Etsy that are most of all artisans working at home and doesn't have much time to care of it.
 
 ## Tech Stack
 
